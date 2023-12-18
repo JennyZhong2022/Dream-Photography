@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dream Photography</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li> <a href="{% url 'home'%}">Dream Photography</a> </li>
+      </ul>
+      <ul>
+        <li> <a href="{% url 'about'%}">About </a> </li>
+        <li><a href="{% url 'photographers_create'%}">Add a Photographer</a></li>
+        <li><a href="{% url 'photographers_index'%}">View Photographers</a></li>
+
+       
+      </ul>
+    </nav>
+  </header>
+
+ <main>
+  {% block content%}
+  {% endblock %}
+ </main>
+
+  <footer class="page-footer">
+    All Rights Reserved, &copy;Dream Photography 2023 
+  </footer>
+</body>
+</html>  

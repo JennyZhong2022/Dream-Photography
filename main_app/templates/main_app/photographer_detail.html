@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content%}
+<h1>Photographers Details</h1>
+
+
+<div>
+  <p>Photographer name: {{photographer.name}}</p>
+  <p>Area of expertise: {{photographer.area_of_expertise}}</p>
+  <p>Description:{{photographer.description}}</p>
+ <a href="{% url 'photographers_update' photographer.id %}">Edit</a>
+ <a href="{% url 'photographers_delete' photographer.id %}">Delete</a>
+</div>
+
+
+{% endblock %}

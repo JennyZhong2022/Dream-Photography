@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content%}
+<h1>Photographers List</h1>
+
+{%for photographer in photographer_list %}
+
+<a href="{% url 'photographers_details' photographer.id %}">
+<div>
+  <p>Photographer name: {{photographer.name}}</p>
+  <p>Area of expertise: {{photographer.area_of_expertise}}</p>
+</div>
+</a>
+{% endfor %}
+
+{% endblock %}
