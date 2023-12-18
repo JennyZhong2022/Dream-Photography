@@ -13,7 +13,12 @@ urlpatterns=[
   path('photographers/<int:pk>/delete/',views.PhotographerDelete.as_view(),name='photographers_delete'),
 
 
-
+  path('clients/', views.ClientList.as_view(),name='clients_index'),
+  path('clients/create',views.ClientCreate.as_view(),name='clients_create'),
+  path('clients/<int:pk>',views.ClientDetail.as_view(),
+  name='clients_details'),
+  path('clients/<int:pk>/update/',views.ClientUpdate.as_view(),name='clients_update'),
+  path('clients/<int:pk>/delete/',views.ClientDelete.as_view(),name='clients_delete'),
 
 
 

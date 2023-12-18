@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content%}
+<h1>Delete Wedding</h1>
+
+<h4>Are you sure you want to delete the photographer<span>{{object.bride_name}} &{{object.groom_name}}'s wedding information</span>?</h4>
+
+<form action="" method="POST">
+  {%csrf_token %}
+  <input type="submit" value="Yes - Delete!">
+  <a href="{% url 'clients_details' object.id%}">Cancel</a>
+</form>
+
+
+{% endblock %}

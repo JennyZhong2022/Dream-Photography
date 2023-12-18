@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content%}
+<h1>Wedding Details</h1>
+
+
+<div>
+  <p>Bride Name: {{client.bride_name}}</p>
+  <p>Groom Name: {{client.groom_name}}</p>
+  <p>Bride age: {{client.bride_age}}</p>
+  <p>Groom age: {{client.groom_age}}</p>
+  <p> {{client.wedding_date}}</p>
+  <p>Location: {{client.location}}</p>
+  <p>Guests Number: {{client.guests}}</p>
+
+ <a href="{% url 'clients_update' client.id %}">Edit</a>
+ <a href="{% url 'clients_delete' client.id %}">Delete</a>
+</div>
+
+
+{% endblock %}
