@@ -49,3 +49,11 @@ class Photographer(models.Model):
   def get_absolute_url(self):
     return reverse('photographers_details',kwargs={'pk':self.id})  
 
+class Message(models.Model):
+    sender = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='sent_messages')
+    recipient = models.ForeignKey(Photographer, on_delete=models.CASCADE, related_name='received_messages')
+    content=models.TextField()
+    timestamp=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+      return f'Message from{self.sender} to {self.recipient}'

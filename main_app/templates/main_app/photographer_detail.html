@@ -22,6 +22,18 @@
                 <p>Bride Name: {{ client.bride_name }}</p>
                 <p>Groom Name: {{ client.groom_name }}</p>
                 <p>Wedding Date: {{ client.wedding_date }}</p>
+                <div>
+                  {% for message in messages %}
+                  {% if message.sender == client %}
+                      <p>{{ message.content }} - {{ message.timestamp }}</p>
+                  {% endif %}
+                 {% endfor %}
+                </div>
+                
+                <form action="{% url 'unassoc_client' photographer.id client.id  %}" method="POST">
+                  {% csrf_token %}
+                  <button type="submit" class="btn">Remove</button>
+                </form>
             </div>
         {% endfor %}
     {% else %}
@@ -43,6 +55,13 @@
               <p>Bride Name: {{ client.bride_name }}</p>
               <p>Groom Name: {{ client.groom_name }}</p>
               <p>Wedding Date: {{ client.wedding_date }}</p>
+              <div>
+              {% for message in messages %}
+                 {% if message.sender == client %}
+                 <p>{{message.content}} - {{message.timestamp}}</p>
+                 {% endif %}
+              {% endfor %}
+              </div>
               <form action="{% url 'assoc_client' photographer.id client.id %}" method="POST">
                   {% csrf_token %}
                   <button type="submit" class="btn">Add</button>
