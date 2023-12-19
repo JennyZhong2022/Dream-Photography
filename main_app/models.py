@@ -4,12 +4,13 @@ from datetime import date
 # Create your models here.
 
 Expertise=(
+  ('WP','Wedding Photography'),
+  ('WV','Wedding Videography'),
+  ('WB','Wedding Photography & Videography'),
   ('PP','PreWedding Photography'),
   ('PV','PreWedding Videography'),
   ('PB','PreWedding Photography & Videography'),
-  ('WP','Wedding Photography'),
-  ('WV','Wedding Videography'),
-  ('WB','Wedding Photography & Videography')
+  ('AL','All-round')
 )
 
 

@@ -5,6 +5,7 @@ from .models import Photographer,Client,Message
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
+from django.contrib import messages
 
 
 
@@ -96,6 +97,8 @@ class ClientDetail(DetailView):
         context['photographers'] = client.photographer_set.all()
         all_photographers = Photographer.objects.all()
         context['all_photographers'] = all_photographers
+      
+
         return context
 
 
@@ -120,7 +123,13 @@ class SendMessageView(View):
         content = request.POST.get('content')
         Message.objects.create(sender=client, recipient=photographer, content=content)
 
-        # Redirect to the appropriate page, client details or another relevant page
+        
+        success_message = f'Your message has been sent to {photographer.name}'
+        messages.success(request,success_message)
+            # Redirect to the appropriate page, client details or another relevant page
         return redirect(reverse('clients_details', kwargs={'pk': client_pk}))
+        
+ 
+                
 
 

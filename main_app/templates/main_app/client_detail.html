@@ -38,15 +38,23 @@
 
 <div class="all-photographers">
   <h2>All photographer</h2>
+  {% if messages %}
+  {% for message in messages %}
+      <div class="alert alert-success" role="alert">
+          {{ message }}
+      </div>
+  {% endfor %}
+  {% endif %}   
+
   {% if all_photographers %}
       {% for photographer in all_photographers %}
           <div>
               <p>Photographer name: {{photographer.name}}</p>
-              
+             
               <form action="{% url 'send_message' photographer.id client.id %}" method="POST">
                 {% csrf_token %}
                 <textarea name="content"></textarea>
-                <button type="submit" >Message</button>
+                <button type="submit" >Send Message</button>
               </form>
 
           </div>
