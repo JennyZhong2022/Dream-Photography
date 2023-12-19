@@ -24,6 +24,8 @@ urlpatterns=[
 
     path('photographer/<int:photographer_pk>/send_message/<int:client_pk>/', views.SendMessageView.as_view(), name='send_message'),
 
+    path('register/photographer/',views.register_photographer, name='register_photographer')
+
 
 ]
 

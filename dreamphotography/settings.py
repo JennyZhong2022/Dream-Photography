@@ -122,3 +122,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# redirect users to the homepage
+# LOGIN_REDIRECT_URL = '/'
+# or a view page
+# LOGIN_REDIRECT_URL = 'some_view_name'
+
+LOGIN_REDIRECT_URL = 'photographers_index'

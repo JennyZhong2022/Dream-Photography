@@ -6,7 +6,10 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
 from django.contrib import messages
-
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group, Permission
 
 
 
@@ -131,5 +134,26 @@ class SendMessageView(View):
         
  
                 
+class PhotographerRegistrationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields=['username','password1','password2']
+
+# class PhotographerRegistrationForm(UserCreationForm):
+#     class Meta:
+#         model = User
+#         fields=['username','password1','password2']
+
+def register_photographer(request):
+    if request.method == 'POST':
+        form=PhotographerRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            group=Group.objects.get(name='Photographer')
+            user.groups.add(group)
+            return redirect('photographers_index')
+    else:
+        form=PhotographerRegistrationForm()
+    return render(request,'registration/photographer_register.html',{'form':form})    
 
 

@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from datetime import date
+
+
 # Create your models here.
 
 Expertise=(
@@ -12,6 +14,7 @@ Expertise=(
   ('PB','PreWedding Photography & Videography'),
   ('AL','All-round')
 )
+
 
 
 class Client(models.Model):
@@ -43,6 +46,7 @@ class Photographer(models.Model):
     )
   description=models.TextField(max_length=250)
   clients=models.ManyToManyField(Client)
+  # user=models.ForeignKey(User,on_delete=CASCADE)
 
   def __str__(self):
     return f'{self.name} :{self.get_area_of_expertise_display()}'
