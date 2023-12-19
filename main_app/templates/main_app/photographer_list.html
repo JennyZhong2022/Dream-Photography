@@ -7,7 +7,7 @@
 <a href="{% url 'photographers_details' photographer.id %}">
 <div>
   <p>Photographer name: {{photographer.name}}</p>
-  <p>Area of expertise: {{photographer.area_of_expertise}}</p>
+  <p>Area of expertise: {{photographer.get_area_of_expertise_display}}</p>
 </div>
 </a>
 {% endfor %}

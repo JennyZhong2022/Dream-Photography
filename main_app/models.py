@@ -13,22 +13,6 @@ Expertise=(
 )
 
 
-class Photographer(models.Model):
-  name=models.CharField(max_length=50)
-  area_of_expertise=models.CharField(
-    max_length=2, 
-    choices=Expertise,
-    default=Expertise[0][1]
-    )
-  description=models.TextField(max_length=250)
-
-  def __str__(self):
-    return f'{self.name} :{self.get_area_of_expertise_display()}'
-
-  def get_absolute_url(self):
-    return reverse('photographers_details',kwargs={'pk':self.id})  
-
-
 class Client(models.Model):
     bride_name = models.CharField(max_length=50)
     groom_name = models.CharField(max_length=50)
@@ -47,3 +31,21 @@ class Client(models.Model):
 
     def get_absolute_url(self):
       return reverse('clients_details',kwargs={'pk':self.id})  
+
+
+class Photographer(models.Model):
+  name=models.CharField(max_length=50)
+  area_of_expertise=models.CharField(
+    max_length=2, 
+    choices=Expertise,
+    default=Expertise[0][0]
+    )
+  description=models.TextField(max_length=250)
+  clients=models.ManyToManyField(Client)
+
+  def __str__(self):
+    return f'{self.name} :{self.get_area_of_expertise_display()}'
+
+  def get_absolute_url(self):
+    return reverse('photographers_details',kwargs={'pk':self.id})  
+
