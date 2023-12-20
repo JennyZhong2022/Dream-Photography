@@ -134,7 +134,3 @@ LOGIN_REDIRECT_URL = 'photographers_index'
 
 LOGOUT_REDIRECT_URL = '/'
 
-AUTHENTICATION_BACKENDS=[
-    'django.contrib.auth.backends.ModelBackend',  # Default backend for regular logins
-    'main_app.backends.AdminUserBackend'    # Custom backend for admin logins
-]
