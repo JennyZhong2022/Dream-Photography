@@ -10,6 +10,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group, Permission
+from django.contrib.auth import authenticate, login
 
 
 
@@ -157,3 +158,15 @@ def register_photographer(request):
     return render(request,'registration/photographer_register.html',{'form':form})    
 
 
+def login_photographer(request):
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None and user.groups.filter(name='Photographer').exists():
+            login(request,user)
+            return redirect('photographers_index')
+        else:
+            messages.error(request,'Invalid username or password.')  
+               
+    return render(request,'registration/photographer_login.html')        
