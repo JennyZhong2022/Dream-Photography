@@ -11,11 +11,12 @@
     <p> {{client.wedding_date}}</p>
     <p>Location: {{client.location}}</p>
     <p>Guests Number: {{client.guests}}</p>
+
     {% if not is_photographer %}
    <a href="{% url 'clients_update' client.id %}">Edit</a>
    <a href="{% url 'clients_delete' client.id %}">Delete</a>
   </div>
-  {% endif %}
+   {%endif%}
 
   <hr>
 
@@ -35,6 +36,7 @@
     {% endif %}
 </div>
 
+{% if not is_photographer %}
 <hr>
 
 <div class="all-photographers">
@@ -69,6 +71,7 @@
       <h3>No more weddings available</h3>
   {% endif %}
 </div>
+{% endif %}
 </div>
 
 

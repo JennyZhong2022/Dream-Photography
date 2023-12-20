@@ -25,6 +25,15 @@ def about(request):
 class PhotographerList(LoginRequiredMixin,ListView):
     model=Photographer  
 
+    def get_queryset(self):
+        """Return the list of items for this view."""
+        if self.request.user.groups.filter(name='Photographer').exists():
+            # If the user is in the 'Client' group, show only their entries
+            return Photographer.objects.filter(user=self.request.user)
+        else:
+            # Otherwise, show all entries
+            return Photographer.objects.all()  
+
 
 class PhotographerDetail(LoginRequiredMixin,DetailView):
     model=Photographer  
@@ -77,6 +86,12 @@ class UnAssocClientView(LoginRequiredMixin,View):
 class PhotographerCreate(LoginRequiredMixin,CreateView):
     model = Photographer
     fields = ['name','area_of_expertise','description']
+
+    def form_valid(self, form):
+    # Assign the logged in user (self.request.user)
+        form.instance.user = self.request.user  # form.instance is the client
+    # Let the CreateView do its job as usual
+        return super().form_valid(form)
     
 class PhotographerUpdate(LoginRequiredMixin,UpdateView):
     model=Photographer

@@ -11,7 +11,7 @@
     {% if not is_client %}
    <a href="{% url 'photographers_update' photographer.id %}">Edit</a>
    <a href="{% url 'photographers_delete' photographer.id %}">Delete</a>
-   {% endif %}
+ 
   </div>
 
   <hr>
@@ -33,25 +33,26 @@
                  {% endfor %}
                 </div>
 
-                {% if not is_client %}
+               
                 <form action="{% url 'unassoc_client' photographer.id client.id  %}" method="POST">
                   {% csrf_token %}
                   
                   <button type="submit" class="btn">Remove</button>
                  
                 </form>
-                {% endif %}
+              
             </div>
         {% endfor %}
     {% else %}
         <h3>No weddings</h3>
     {% endif %}
+   
 </div>
 
 
 
 <hr>
-
+{% if not is_client %}
 
 <div class="available-clients">
   <h2>Available Clients</h2>
@@ -76,16 +77,16 @@
                   <button type="submit" class="btn">Add</button>
               </form>
               {% endif %}
-              
+
           </div>
       {% endfor %}
   {% else %}
       <h3>No more weddings available</h3>
   {% endif %}
 </div>
-
+{% endif %}
   
 </div>
 
-
+{% endif %}
 {% endblock %}

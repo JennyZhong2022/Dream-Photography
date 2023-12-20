@@ -23,24 +23,27 @@
 
         {% if user.is_authenticated %}
 
-        {% if not is_photographer and not is_client %}
-        <li><a href="{% url 'photographers_create' %}">Add a Photographer</a></li>
+        {% if not is_client %}
+        <li><a href="{% url 'photographers_create' %}">I Want To Be A Photographer</a></li>
         {% endif %}
        
 
     
         
-
+        {% if is_photographer %}
+        <li><a href="{% url 'photographers_index'%}">View My Photography</a></li>
+        {% else %}
         <li><a href="{% url 'photographers_index'%}">View All Photographers</a></li>
+        {% endif %}
 
         {% if not is_photographer %}
         <li><a href="{% url 'clients_create' %}">Add My Wedding</a></li>
         {% endif %}
         
-        {% if not is_client %}
-        <li><a href="{% url 'clients_index' %}">View All Weddings</a></li>
-        {% else %}
+        {% if is_client %}
         <li><a href="{% url 'clients_index' %}">View My Weddings</a></li>
+        {% else %}
+        <li><a href="{% url 'clients_index' %}">View All Weddings</a></li>
         {% endif %}
 
 

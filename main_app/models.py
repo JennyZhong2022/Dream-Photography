@@ -31,10 +31,6 @@ class Client(models.Model):
 
 
 
-
-
-
-
     def __str__(self):
         return f"{self.bride_name} and {self.groom_name}'s Wedding"
 
@@ -53,7 +49,7 @@ class Photographer(models.Model):
     )
   description=models.TextField(max_length=250)
   clients=models.ManyToManyField(Client)
-  # user=models.ForeignKey(User,on_delete=CASCADE)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
     return f'{self.name} :{self.get_area_of_expertise_display()}'
