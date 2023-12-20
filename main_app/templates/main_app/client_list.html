@@ -5,8 +5,8 @@
   <h1 class="text-center mb-4">Clients' List</h1>
 
   {% for client in client_list %}
-    <div class="card-wrapper mb-3">
-      <div class="card">
+  <div style="max-width: 75%; margin: 0 auto;" class="mb-3">
+    <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ client.bride_name }} & {{ client.groom_name }}</h5>
           <p class="card-text">Wedding Date: {{ client.wedding_date }}</p>

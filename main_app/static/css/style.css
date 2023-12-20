@@ -13,15 +13,15 @@ main{
   text-align: center;
 }
 
-.card-wrapper {
-  max-width: 75%; /* Adjust this value as needed */
-  margin: 0 auto; /* Centers the card */
-}
+/* .card-wrapper {
+    max-width: 75%; 
+    margin: 0 auto; 
+} */
 
 @media (max-width: 768px) {
-  .card-wrapper {
-      max-width: 100%;
-  }
+    .card-wrapper {
+        max-width: 100%;
+    }
 }
 
 
