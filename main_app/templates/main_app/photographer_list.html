@@ -1,15 +1,22 @@
 {% extends 'base.html' %}
-{% block content%}
-<h1>Photographers List</h1>
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Photographers List</h1>
 
-{%for photographer in photographer_list %}
-
-<a href="{% url 'photographers_details' photographer.id %}">
-<div>
-  <p>Photographer name: {{photographer.name}}</p>
-  <p>Area of expertise: {{photographer.get_area_of_expertise_display}}</p>
+  <div class="row">
+    {% for photographer in photographer_list %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ photographer.name }}</h5>
+            <p class="card-text">Area of expertise: {{ photographer.get_area_of_expertise_display }}</p>
+          </div>
+          <div class="card-footer">
+            <a href="{% url 'photographers_details' photographer.id %}" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 </div>
-</a>
-{% endfor %}
-
 {% endblock %}

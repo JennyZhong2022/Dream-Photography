@@ -1,92 +1,93 @@
 {% extends 'base.html' %}
-{% block content%}
-<h1>Photographers Details</h1>
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-center">Photographer Details</h1>
 
-<div>
-  <div>
-    <p>Photographer name: {{photographer.name}}</p>
-    <p>Area of expertise: {{photographer.get_area_of_expertise_display}}</p>
-    <p>Description:{{photographer.description}}</p>
-
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">{{ photographer.name }}</h5>
+      <p class="card-text">Area of expertise: {{ photographer.get_area_of_expertise_display }}</p>
+      <p class="card-text">Description: {{ photographer.description }}</p>
+    </div>
     {% if not is_client %}
-   <a href="{% url 'photographers_update' photographer.id %}">Edit</a>
-   <a href="{% url 'photographers_delete' photographer.id %}">Delete</a>
- 
+      <div class="card-footer">
+        <a href="{% url 'photographers_update' photographer.id %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'photographers_delete' photographer.id %}" class="btn btn-danger">Delete</a>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- My Clients Section -->
+  <div class="my-clients">
+    <h2 class="text-center mb-4">My Clients</h2>
+    {% if clients %}
+      <div class="row">
+        {% for client in clients %}
+          <div class="col-md-4 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">{{ client.bride_name }} & {{ client.groom_name }}</h5>
+                <p class="card-text">Wedding Date: {{ client.wedding_date }}</p>
+                {% for message in messages %}
+                  {% if message.sender == client %}
+                    <p class="small"><em>{{ message.content }} - {{ message.timestamp }}</em></p>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              {% if not is_client %}
+                <div class="card-footer">
+                  <form action="{% url 'unassoc_client' photographer.id client.id  %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-warning btn-sm">Remove</button>
+                  </form>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-center">No weddings</p>
+    {% endif %}
   </div>
 
   <hr>
 
-  <div class="my-clients">
-    <h2>My Clients</h2>
-    {% if clients %}
-        {% for client in clients %}
-            <div>
-                <!-- Client details -->
-                <p>Bride Name: {{ client.bride_name }}</p>
-                <p>Groom Name: {{ client.groom_name }}</p>
-                <p>Wedding Date: {{ client.wedding_date }}</p>
-                <div>
+  <!-- Available Clients Section -->
+  {% if not is_client %}
+    <div class="available-clients mt-4">
+      <h2 class="text-center mb-4">Available Clients</h2>
+      {% if all_clients %}
+        <div class="row">
+          {% for client in all_clients %}
+            <div class="col-md-4 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">{{ client.bride_name }} & {{ client.groom_name }}</h5>
+                  <p class="card-text">Wedding Date: {{ client.wedding_date }}</p>
                   {% for message in messages %}
-                  {% if message.sender == client %}
-                      <p>{{ message.content }} - {{ message.timestamp }}</p>
-                  {% endif %}
-                 {% endfor %}
+                    {% if message.sender == client %}
+                      <p class="small"><em>{{ message.content }} - {{ message.timestamp }}</em></p>
+                    {% endif %}
+                  {% endfor %}
                 </div>
-
-               
-                <form action="{% url 'unassoc_client' photographer.id client.id  %}" method="POST">
-                  {% csrf_token %}
-                  
-                  <button type="submit" class="btn">Remove</button>
-                 
-                </form>
-              
-            </div>
-        {% endfor %}
-    {% else %}
-        <h3>No weddings</h3>
-    {% endif %}
-   
-</div>
-
-
-
-<hr>
-{% if not is_client %}
-
-<div class="available-clients">
-  <h2>Available Clients</h2>
-  {% if all_clients %}
-      {% for client in all_clients %}
-          <div>
-              <!-- Client details -->
-              <p>Bride Name: {{ client.bride_name }}</p>
-              <p>Groom Name: {{ client.groom_name }}</p>
-              <p>Wedding Date: {{ client.wedding_date }}</p>
-              <div>
-              {% for message in messages %}
-                 {% if message.sender == client %}
-                 <p>{{message.content}} - {{message.timestamp}}</p>
-                 {% endif %}
-              {% endfor %}
+                {% if not is_client %}
+                  <div class="card-footer">
+                    <form action="{% url 'assoc_client' photographer.id client.id %}" method="POST">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-success btn-sm">Add</button>
+                    </form>
+                  </div>
+                {% endif %}
               </div>
-
-              {% if not is_client %}
-              <form action="{% url 'assoc_client' photographer.id client.id %}" method="POST">
-                  {% csrf_token %}
-                  <button type="submit" class="btn">Add</button>
-              </form>
-              {% endif %}
-
-          </div>
-      {% endfor %}
-  {% else %}
-      <h3>No more weddings available</h3>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-center">No more weddings available</p>
+      {% endif %}
+    </div>
   {% endif %}
 </div>
-{% endif %}
-  
-</div>
 
-{% endif %}
 {% endblock %}

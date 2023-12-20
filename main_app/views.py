@@ -186,7 +186,7 @@ def register_photographer(request):
             group=Group.objects.get(name='Photographer')
             user.groups.add(group)
             login(request, user)
-            return redirect('photographers_index')
+            return redirect('clients_index')
     else:
         form=RegistrationForm()
     return render(request,'registration/photographer_register.html',{'form':form})    
@@ -221,7 +221,7 @@ def register_client(request):
             group = Group.objects.get(name='Client')
             user.groups.add(group)
             login(request, user)
-            return redirect('clients_index')  # Redirect to a client-specific page
+            return redirect('photographer_index')  # Redirect to a client-specific page
     else:
         form = RegistrationForm()
 

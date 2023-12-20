@@ -1,26 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Photographer Login</h1>
-  {% if messages %}
-  {% for message in messages %}
-    <p>{{ message }}</p>
-  {% endfor %}
-  {% endif %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1 class="mb-4 text-center">Photographer Login</h1>
+      {% if messages %}
+        <div class="alert alert-warning" role="alert">
+          {% for message in messages %}
+            {{ message }}
+          {% endfor %}
+        </div>
+      {% endif %}
 
-  <form action="{% url 'login_photographer' %}" method="POST">
-    {% csrf_token %}
-    <div>
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="username" required>
+      <form action="{% url 'login_photographer' %}" method="POST" class="border p-4 bg-light shadow">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="username" class="form-label">Username:</label>
+          <input type="text" name="username" id="username" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password:</label>
+          <input type="password" name="password" id="password" class="form-control" required>
+        </div>
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit" class="btn btn-primary w-100">Photographer Log In</button>
+        <div class="mt-4 text-center">
+          <hr>
+          <a href="{% url 'register_photographer' %}" class="text-decoration-none">I want to be a Photographer!</a>
+        </div>
+      </form>
     </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" required>
-    </div>
-    <input type="hidden" name="next" value="{{ next }}">
-    <button type="submit" class="btn">Photographer Log In</button>
-  </form>
- 
+  </div>
+</div>
 {% endblock %}
-  

@@ -1,4 +1,25 @@
 {% extends 'base.html' %}
-{% block content%}
-  <h1>HOME</h1>
+
+{% block content %}
+<div class="home-page-container">
+    <div class="photo-side">
+        <!-- The photo will be added here later -->
+    </div>
+    <div class="info-side">
+        <h1 class="app-name">DreamPhotography</h1>
+        <p class="subtitle">Capture the moments that matter</p>
+        <p class="choose-studio">Your Perfect Wedding Photography Studio</p>
+       
+        <div class="signup-links">
+          <ul>
+           <li><a href="{% url 'register_photographer' %}" class="signup-photographer">I want to be a Photographer</a></li>
+           <!-- <li><a href="{% url 'login_photographer' %}">I am a photographer</a></li> -->
+           <li><a href="{% url 'register_client' %}" class="signup-client">I have a Wedding coming</a></li>
+           <!-- <li> <a href="{% url 'login_client' %}">I am your client</a></li> -->
+
+          </ul>
+           
+        </div>
+    </div>
+</div>
 {% endblock %}
