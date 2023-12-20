@@ -133,10 +133,17 @@ class ClientDetail(LoginRequiredMixin,DetailView):
 
         return context
 
+class WeddingDateForm(forms.ModelForm):
+    class Meta:
+        model = Client
+        fields=['bride_name','groom_name','bride_age','groom_age','wedding_date','location','guests']  
+        widgets = {
+            'wedding_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'})
+        }
 
 class ClientCreate(LoginRequiredMixin,CreateView):
     model = Client
-    fields=['bride_name','groom_name','bride_age','groom_age','wedding_date','location','guests'] 
+    form_class = WeddingDateForm 
 
     def form_valid(self, form):
     # Assign the logged in user (self.request.user)
@@ -147,7 +154,7 @@ class ClientCreate(LoginRequiredMixin,CreateView):
 
 class ClientUpdate(LoginRequiredMixin,UpdateView):
     model=Client
-    fields=['bride_name','groom_name','bride_age','groom_age','wedding_date','location','guests'] 
+    form_class = WeddingDateForm  
 
 class ClientDelete(LoginRequiredMixin,DeleteView):
     model=Client
@@ -241,3 +248,5 @@ def login_client(request):
             messages.error(request, 'Invalid username or password.')
 
     return render(request, 'registration/client_login.html')
+
+

@@ -14,13 +14,14 @@
         <a href="{% url 'photographers_update' photographer.id %}" class="btn btn-primary">Edit</a>
         <a href="{% url 'photographers_delete' photographer.id %}" class="btn btn-danger">Delete</a>
       </div>
-    {% endif %}
+      {% endif %}
   </div>
 
   <div class="photo-placeholder bg-light border mb-4" style="height: 100%; min-height: 400px;">
     <!-- Photo will be added here later -->
 </div>
 
+{% if not is_client %}
 <hr>
   <!-- My Clients Section -->
   <div class="my-clients">
@@ -39,14 +40,14 @@
                   {% endif %}
                 {% endfor %}
               </div>
-              {% if not is_client %}
+          
                 <div class="card-footer">
                   <form action="{% url 'unassoc_client' photographer.id client.id  %}" method="POST">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-warning btn-sm">Remove</button>
                   </form>
                 </div>
-              {% endif %}
+            
             </div>
           </div>
         {% endfor %}
@@ -59,7 +60,7 @@
   <hr>
 
   <!-- Available Clients Section -->
-  {% if not is_client %}
+
     <div class="available-clients mt-4">
       <h2 class="text-center mb-4">Available Clients</h2>
       {% if all_clients %}
@@ -76,14 +77,14 @@
                     {% endif %}
                   {% endfor %}
                 </div>
-                {% if not is_client %}
+               
                   <div class="card-footer">
                     <form action="{% url 'assoc_client' photographer.id client.id %}" method="POST">
                       {% csrf_token %}
                       <button type="submit" class="btn btn-success btn-sm">Add</button>
                     </form>
                   </div>
-                {% endif %}
+                
               </div>
             </div>
           {% endfor %}
@@ -92,7 +93,7 @@
         <p class="text-center">No more weddings available</p>
       {% endif %}
     </div>
-  {% endif %}
+ {% endif %}
 </div>
 
 {% endblock %}
