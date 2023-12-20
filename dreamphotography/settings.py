@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--sr4^o88*cv!gb^!c8*2#!#mq9neo6@uygy8jmli&*=mab#dl-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -73,6 +73,7 @@ WSGI_APPLICATION = 'dreamphotography.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+import django_heroku
 
 DATABASES = {
     'default': {
@@ -81,7 +82,7 @@ DATABASES = {
     }
 }
 
-
+django_heroku.settings(locals())
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -130,3 +131,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # LOGIN_REDIRECT_URL = 'some_view_name'
 
 LOGIN_REDIRECT_URL = 'photographers_index'
+
+LOGOUT_REDIRECT_URL = '/'
+
+AUTHENTICATION_BACKENDS=[
+    'django.contrib.auth.backends.ModelBackend',  # Default backend for regular logins
+    'main_app.backends.AdminUserBackend'    # Custom backend for admin logins
+]

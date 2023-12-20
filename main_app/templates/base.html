@@ -24,7 +24,7 @@
         <li><a href="{% url 'register_photographer' %}">Photographer Sign Up</a></li>
         <li><a href="{% url 'login_photographer' %}">Photographer Log In</a></li>
         <li><a href="{% url 'login' %}">Admin Log in</a></li>
-        <li><a href="{% url 'home'%}" onclick="document.getElementById('logout-form').submit();">Log Out</a>
+        <li><a href="#" onclick="document.getElementById('logout-form').submit();">Log Out</a>
           <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
               {% csrf_token %}
           </form>

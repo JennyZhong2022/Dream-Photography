@@ -140,6 +140,13 @@ class PhotographerRegistrationForm(UserCreationForm):
         model = User
         fields=['username','password1','password2']
 
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_staff = False
+        if commit:
+            user.save()
+        return user    
+
 # class PhotographerRegistrationForm(UserCreationForm):
 #     class Meta:
 #         model = User
@@ -160,13 +167,16 @@ def register_photographer(request):
 
 def login_photographer(request):
     if request.method=='POST':
+      # authenticate and log the user in
         username=request.POST.get('username')
         password=request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None and user.groups.filter(name='Photographer').exists():
             login(request,user)
+            # Redirect based on user type
             return redirect('photographers_index')
         else:
+            # Handle login failure
             messages.error(request,'Invalid username or password.')  
-               
+
     return render(request,'registration/photographer_login.html')        
