@@ -7,8 +7,11 @@
     <p>Photographer name: {{photographer.name}}</p>
     <p>Area of expertise: {{photographer.get_area_of_expertise_display}}</p>
     <p>Description:{{photographer.description}}</p>
+
+    {% if not is_client %}
    <a href="{% url 'photographers_update' photographer.id %}">Edit</a>
    <a href="{% url 'photographers_delete' photographer.id %}">Delete</a>
+   {% endif %}
   </div>
 
   <hr>
@@ -29,11 +32,15 @@
                   {% endif %}
                  {% endfor %}
                 </div>
-                
+
+                {% if not is_client %}
                 <form action="{% url 'unassoc_client' photographer.id client.id  %}" method="POST">
                   {% csrf_token %}
+                  
                   <button type="submit" class="btn">Remove</button>
+                 
                 </form>
+                {% endif %}
             </div>
         {% endfor %}
     {% else %}
@@ -62,10 +69,14 @@
                  {% endif %}
               {% endfor %}
               </div>
+
+              {% if not is_client %}
               <form action="{% url 'assoc_client' photographer.id client.id %}" method="POST">
                   {% csrf_token %}
                   <button type="submit" class="btn">Add</button>
               </form>
+              {% endif %}
+              
           </div>
       {% endfor %}
   {% else %}

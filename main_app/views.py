@@ -11,7 +11,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth import authenticate, login
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
@@ -21,11 +22,11 @@ def home(request):
 def about(request):
     return render(request,'about.html')  
 
-class PhotographerList(ListView):
+class PhotographerList(LoginRequiredMixin,ListView):
     model=Photographer  
 
 
-class PhotographerDetail(DetailView):
+class PhotographerDetail(LoginRequiredMixin,DetailView):
     model=Photographer  
 
     def get_context_data(self, **kwargs):
@@ -50,7 +51,7 @@ class PhotographerDetail(DetailView):
         return context
 
 
-class AssocClientView(View):
+class AssocClientView(LoginRequiredMixin,View):
     # Define a POST method for this view.
     def post(self, request, pk, client_pk):
         # Retrieve the photographer and client objects, ensuring they exist.
@@ -64,7 +65,7 @@ class AssocClientView(View):
         # Redirect to the photographer's detail page after the association.
         return redirect(reverse('photographers_details', kwargs={'pk': pk}))
 
-class UnAssocClientView(View):
+class UnAssocClientView(LoginRequiredMixin,View):
      def post(self, request, pk, client_pk):
         photographer = get_object_or_404(Photographer, pk=pk)
         client = get_object_or_404(Client, pk=client_pk)
@@ -73,27 +74,39 @@ class UnAssocClientView(View):
 
 
 
-class PhotographerCreate(CreateView):
+class PhotographerCreate(LoginRequiredMixin,CreateView):
     model = Photographer
     fields = ['name','area_of_expertise','description']
-
-class PhotographerUpdate(UpdateView):
+    
+class PhotographerUpdate(LoginRequiredMixin,UpdateView):
     model=Photographer
     fields=['area_of_expertise','description']
 
-class PhotographerDelete(DeleteView):
+class PhotographerDelete(LoginRequiredMixin,DeleteView):
     model=Photographer
     success_url='/photographers'
 
 
 
 
-class ClientList(ListView):
+class ClientList(LoginRequiredMixin,ListView):
     model=Client  
+    # if the user is in group client, only can see own list
+    # else user can see all list
+    def get_queryset(self):
+        """Return the list of items for this view."""
+        if self.request.user.groups.filter(name='Client').exists():
+            # If the user is in the 'Client' group, show only their entries
+            return Client.objects.filter(user=self.request.user)
+        else:
+            # Otherwise, show all entries
+            return Client.objects.all()  
 
 
-class ClientDetail(DetailView):
-    model=Client  
+
+class ClientDetail(LoginRequiredMixin,DetailView):
+    model=Client 
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -106,20 +119,27 @@ class ClientDetail(DetailView):
         return context
 
 
-class ClientCreate(CreateView):
+class ClientCreate(LoginRequiredMixin,CreateView):
     model = Client
-    fields = '__all__'  
+    fields=['bride_name','groom_name','bride_age','groom_age','wedding_date','location','guests'] 
 
-class ClientUpdate(UpdateView):
+    def form_valid(self, form):
+    # Assign the logged in user (self.request.user)
+        form.instance.user = self.request.user  # form.instance is the client
+    # Let the CreateView do its job as usual
+        return super().form_valid(form)
+
+
+class ClientUpdate(LoginRequiredMixin,UpdateView):
     model=Client
-    fields=['bride_age','groom_age','wedding_date','location','guests'] 
+    fields=['bride_name','groom_name','bride_age','groom_age','wedding_date','location','guests'] 
 
-class ClientDelete(DeleteView):
+class ClientDelete(LoginRequiredMixin,DeleteView):
     model=Client
     success_url='/clients'
 
 
-class SendMessageView(View):
+class SendMessageView(LoginRequiredMixin,View):
     def post(self, request, client_pk, photographer_pk):
         photographer = get_object_or_404(Photographer, pk=photographer_pk)
         client = get_object_or_404(Client, pk=client_pk)
@@ -134,43 +154,75 @@ class SendMessageView(View):
         return redirect(reverse('clients_details', kwargs={'pk': client_pk}))
         
  
+#  GROUP photographer
                 
-class PhotographerRegistrationForm(UserCreationForm):
+class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields=['username','password1','password2']
 
 
-# class PhotographerRegistrationForm(UserCreationForm):
-#     class Meta:
-#         model = User
-#         fields=['username','password1','password2']
 
 def register_photographer(request):
     if request.method == 'POST':
-        form=PhotographerRegistrationForm(request.POST)
+        form=RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             group=Group.objects.get(name='Photographer')
             user.groups.add(group)
+            login(request, user)
             return redirect('photographers_index')
     else:
-        form=PhotographerRegistrationForm()
+        form=RegistrationForm()
     return render(request,'registration/photographer_register.html',{'form':form})    
 
 
 def login_photographer(request):
-    if request.method=='POST':
-      # authenticate and log the user in
-        username=request.POST.get('username')
-        password=request.POST.get('password')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-        if user is not None and user.groups.filter(name='Photographer').exists():
-            login(request,user)
-            # Redirect based on user type
+
+        # Check if user is a photographer and not a client
+        if user is not None and user.groups.filter(name='Photographer').exists() and not user.groups.filter(name='Client').exists():
+            login(request, user)
             return redirect('photographers_index')
         else:
-            # Handle login failure
-            messages.error(request,'Invalid username or password.')  
+            messages.error(request, 'Invalid username or password.')
 
-    return render(request,'registration/photographer_login.html')        
+    return render(request, 'registration/photographer_login.html')
+
+
+#  GROUP client
+
+
+# views.py
+
+def register_client(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)  # Reusing the same form
+        if form.is_valid():
+            user = form.save()
+            group = Group.objects.get(name='Client')
+            user.groups.add(group)
+            login(request, user)
+            return redirect('clients_index')  # Redirect to a client-specific page
+    else:
+        form = RegistrationForm()
+
+    return render(request, 'registration/client_register.html', {'form': form})
+
+def login_client(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        # Check if user is a client and not a photographer
+        if user is not None and user.groups.filter(name='Client').exists() and not user.groups.filter(name='Photographer').exists():
+            login(request, user)
+            return redirect('clients_index')
+        else:
+            messages.error(request, 'Invalid username or password.')
+
+    return render(request, 'registration/client_login.html')

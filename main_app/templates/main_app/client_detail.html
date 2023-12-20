@@ -11,10 +11,11 @@
     <p> {{client.wedding_date}}</p>
     <p>Location: {{client.location}}</p>
     <p>Guests Number: {{client.guests}}</p>
-  
+    {% if not is_photographer %}
    <a href="{% url 'clients_update' client.id %}">Edit</a>
    <a href="{% url 'clients_delete' client.id %}">Delete</a>
   </div>
+  {% endif %}
 
   <hr>
 
@@ -38,6 +39,8 @@
 
 <div class="all-photographers">
   <h2>All photographer</h2>
+
+
   {% if messages %}
   {% for message in messages %}
       <div class="alert alert-success" role="alert">
@@ -45,17 +48,20 @@
       </div>
   {% endfor %}
   {% endif %}   
+ 
 
   {% if all_photographers %}
       {% for photographer in all_photographers %}
           <div>
               <p>Photographer name: {{photographer.name}}</p>
-             
+
+              {% if not is_photographer %}
               <form action="{% url 'send_message' photographer.id client.id %}" method="POST">
                 {% csrf_token %}
                 <textarea name="content"></textarea>
                 <button type="submit" >Send Message</button>
               </form>
+              {% endif %}
 
           </div>
       {% endfor %}

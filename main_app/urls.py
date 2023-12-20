@@ -22,10 +22,14 @@ urlpatterns=[
     path('clients/<int:pk>/update/',views.ClientUpdate.as_view(),name='clients_update'),
     path('clients/<int:pk>/delete/',views.ClientDelete.as_view(),name='clients_delete'),
 
+    # message from clients to photographers
     path('photographer/<int:photographer_pk>/send_message/<int:client_pk>/', views.SendMessageView.as_view(), name='send_message'),
 
+    # sign up & login
     path('register/photographer/',views.register_photographer, name='register_photographer'),
-    path('login/photographer/',views.login_photographer, name='login_photographer')
+    path('login/photographer/',views.login_photographer, name='login_photographer'),
+    path('register/client/', views.register_client, name='register_client'),
+    path('login/client/', views.login_client, name='login_client'),
 
 
 ]
