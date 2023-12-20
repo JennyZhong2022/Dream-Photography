@@ -1,24 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="home-page-container">
-    <div class="photo-side">
-        <!-- The photo will be added here later -->
-    </div>
-    <div class="info-side">
-        <h1 class="app-name">DreamPhotography</h1>
-        <p class="subtitle">Capture the moments that matter</p>
-        <p class="choose-studio">Your Perfect Wedding Photography Studio</p>
-       
-        <div class="signup-links">
-          <ul>
-           <li><a href="{% url 'register_photographer' %}" class="signup-photographer">I want to be a Photographer</a></li>
-           <!-- <li><a href="{% url 'login_photographer' %}">I am a photographer</a></li> -->
-           <li><a href="{% url 'register_client' %}" class="signup-client">I have a Wedding coming</a></li>
-           <!-- <li> <a href="{% url 'login_client' %}">I am your client</a></li> -->
+<div class="container-fluid mt-5">
+    <div class="row">
+        <!-- Photo Side -->
+        <div class="col-lg-8 col-md-7">
+            <div class="photo-placeholder bg-light border" style="height: 100%; min-height: 400px;">
+                <!-- Photo will be added here later -->
+            </div>
+        </div>
 
-          </ul>
-           
+        <!-- Info Side -->
+        <div class="col-lg-4 col-md-5">
+            <h1 class="app-name">DreamPhotography</h1>
+            <p class="subtitle">Capture the moments that matter</p>
+            <p class="choose-studio">Your Perfect Wedding Photography Studio</p>
+
+            <div class="d-flex flex-column align-items-start">
+                <a href="{% url 'register_photographer' %}" class="btn btn-primary mb-2">I want to be a Photographer</a>
+                <a href="{% url 'login_photographer' %}" class="btn btn-secondary mb-2">I am a photographer</a>
+                <a href="{% url 'register_client' %}" class="btn btn-primary mb-2">I have a Wedding coming</a>
+                <a href="{% url 'login_client' %}" class="btn btn-secondary">I am your client</a>
+            </div>
         </div>
     </div>
 </div>

@@ -13,19 +13,16 @@ main{
   text-align: center;
 }
 
-/* About Page Styles */
-.display-2 {
-  font-size: 4rem; /* Adjust the size as necessary */
+.card-wrapper {
+  max-width: 75%; /* Adjust this value as needed */
+  margin: 0 auto; /* Centers the card */
 }
 
-.blockquote {
-  font-size: 1.5rem; /* Adjust the size as necessary for the quote */
+@media (max-width: 768px) {
+  .card-wrapper {
+      max-width: 100%;
+  }
 }
 
-.lead {
-  font-size: 1.25rem; /* Adjust the size as necessary for the lead text */
-}
-
-/* Ensure this file is linked in your base.html */
 
 

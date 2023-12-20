@@ -1,16 +1,20 @@
 {% extends 'base.html' %}
-{% block content%}
-<h1>Clients' List</h1>
 
-{%for client in client_list %}
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Clients' List</h1>
 
-<a href="{% url 'clients_details' client.id %}">
-<div>
-  <p>Bride Name: {{client.bride_name}}</p>
-  <p>Groom Name: {{client.groom_name}}</p>
-  <p>Wedding Date: {{client.wedding_date}}</p>
+  {% for client in client_list %}
+    <div class="card-wrapper mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ client.bride_name }} & {{ client.groom_name }}</h5>
+          <p class="card-text">Wedding Date: {{ client.wedding_date }}</p>
+          <a href="{% url 'clients_details' client.id %}" class="btn btn-primary">View Details</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
 </div>
-</a>
-{% endfor %}
-
 {% endblock %}
