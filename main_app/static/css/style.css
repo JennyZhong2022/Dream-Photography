@@ -19,6 +19,12 @@ main{
   border-radius: 5px; /* Rounded corners */
 }
 
+.photo-thumbnail {
+  max-width: 100%; /*  100% will use the full column width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+
 
 @media (max-width: 768px) {
     .card-wrapper {

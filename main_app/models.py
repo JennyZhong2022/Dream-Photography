@@ -17,7 +17,6 @@ Expertise=(
 )
 
 
-
 class Client(models.Model):
     bride_name = models.CharField(max_length=50)
     groom_name = models.CharField(max_length=50)
@@ -65,3 +64,11 @@ class Message(models.Model):
 
     def __str__(self):
       return f'Message from{self.sender} to {self.recipient}'
+
+
+class Photo(models.Model):
+    url=models.CharField(max_length=300)
+    photographer=models.ForeignKey(Photographer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Photo for photographer:{self.photographer.name} @ {self.url}'
