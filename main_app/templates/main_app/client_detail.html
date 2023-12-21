@@ -1,79 +1,66 @@
 {% extends 'base.html' %}
-{% block content%}
-<h1>Wedding Details</h1>
 
-<div>
-  <div>
-    <p>Bride Name: {{client.bride_name}}</p>
-    <p>Groom Name: {{client.groom_name}}</p>
-    <p>Bride age: {{client.bride_age}}</p>
-    <p>Groom age: {{client.groom_age}}</p>
-    <p> {{client.wedding_date}}</p>
-    <p>Location: {{client.location}}</p>
-    <p>Guests Number: {{client.guests}}</p>
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Wedding Details</h1>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">{{ client.bride_name }} & {{ client.groom_name }}'s Wedding</h5>
+            <p class="card-text">Bride Age: {{ client.bride_age }}</p>
+            <p class="card-text">Groom Age: {{ client.groom_age }}</p>
+            <p class="card-text">Wedding Date: {{ client.wedding_date }}</p>
+            <p class="card-text">Location: {{ client.location }}</p>
+            <p class="card-text">Guests Number: {{ client.guests }}</p>
+            {% if not is_photographer %}
+                <a href="{% url 'clients_update' client.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'clients_delete' client.id %}" class="btn btn-danger">Delete</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="my-photographers mb-4">
+        <h2>My Photographers</h2>
+        {% if photographers %}
+            <div class="list-group">
+                {% for photographer in photographers %}
+                    <div class="list-group-item">
+                        <p>Photographer name: {{ photographer.name }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No photographer arranged</p>
+        {% endif %}
+    </div>
 
     {% if not is_photographer %}
-   <a href="{% url 'clients_update' client.id %}">Edit</a>
-   <a href="{% url 'clients_delete' client.id %}">Delete</a>
-  </div>
-   {%endif%}
+        <div class="all-photographers">
+            <h2>All Photographers</h2>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
 
-  <hr>
-
-  <div class="my-photographer">
-    <h2>My Photographers</h2>
-    {% if photographers %}
-        {% for photographer in photographers %}
-            <div>
-                
-                <p>Photographer name: {{photographer.name}}</p>
-               
-                </form>
+            <div class="list-group">
+                {% if all_photographers %}
+                    {% for photographer in all_photographers %}
+                        <div class="list-group-item">
+                            <p>Photographer name: {{ photographer.name }}</p>
+                            <form action="{% url 'send_message' photographer.id client.id %}" method="POST">
+                                {% csrf_token %}
+                                <textarea name="content" class="form-control mb-2"></textarea>
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No more photographers available</p>
+                {% endif %}
             </div>
-        {% endfor %}
-    {% else %}
-        <h3>No photographer arranged</h3>
+        </div>
     {% endif %}
 </div>
-
-{% if not is_photographer %}
-<hr>
-
-<div class="all-photographers">
-  <h2>All photographer</h2>
-
-
-  {% if messages %}
-  {% for message in messages %}
-      <div class="alert alert-success" role="alert">
-          {{ message }}
-      </div>
-  {% endfor %}
-  {% endif %}   
- 
-
-  {% if all_photographers %}
-      {% for photographer in all_photographers %}
-          <div>
-              <p>Photographer name: {{photographer.name}}</p>
-
-              {% if not is_photographer %}
-              <form action="{% url 'send_message' photographer.id client.id %}" method="POST">
-                {% csrf_token %}
-                <textarea name="content"></textarea>
-                <button type="submit" >Send Message</button>
-              </form>
-              {% endif %}
-
-          </div>
-      {% endfor %}
-  {% else %}
-      <h3>No more weddings available</h3>
-  {% endif %}
-</div>
-{% endif %}
-</div>
-
-
-
 {% endblock %}

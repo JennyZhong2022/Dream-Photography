@@ -1,14 +1,20 @@
+
+
 {% extends 'base.html' %}
-{% block content%}
-<h1>Delete Wedding</h1>
 
-<h4>Are you sure you want to delete the photographer<span>{{object.bride_name}} &{{object.groom_name}}'s wedding information</span>?</h4>
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 text-center">
+      <h1>Delete Wedding</h1>
+      <h4 class="mb-4">Are you sure you want to delete <span>{{ object.bride_name }} & {{ object.groom_name }}'s</span> wedding information?</h4>
 
-<form action="" method="POST">
-  {%csrf_token %}
-  <input type="submit" value="Yes - Delete!">
-  <a href="{% url 'clients_details' object.id%}">Cancel</a>
-</form>
-
-
+      <form action="" method="POST" class="d-inline-block">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes - Delete!</button>
+      </form>
+      <a href="{% url 'clients_details' object.id %}" class="btn btn-secondary ms-2">Cancel</a>
+    </div>
+  </div>
+</div>
 {% endblock %}

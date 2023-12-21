@@ -35,17 +35,20 @@
                 <h5 class="card-title">{{ client.bride_name }} & {{ client.groom_name }}</h5>
                 <p class="card-text">Wedding Date: {{ client.wedding_date }}</p>
                 {% for message in messages %}
-                  {% if message.sender == client %}
-                    <p class="small"><em>{{ message.content }} - {{ message.timestamp }}</em></p>
-                  {% endif %}
-                {% endfor %}
+                {% if message.sender == client %}
+                  <p class="small"><em>{{ message.content }} - {{ message.timestamp }}</em></p>
+                {% endif %}
+              {% endfor %}
+
               </div>
           
                 <div class="card-footer">
                   <form action="{% url 'unassoc_client' photographer.id client.id  %}" method="POST">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-warning btn-sm">Remove</button>
+                    <button type="submit" class="btn btn-warning btn-sm">Album Coming</button>
                   </form>
+                  
                 </div>
             
             </div>

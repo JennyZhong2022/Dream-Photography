@@ -14,10 +14,11 @@ main{
   text-align: center;
 }
 
-/* .card-wrapper {
-    max-width: 75%; 
-    margin: 0 auto; 
-} */
+.note-style {
+  background-color: #cee6ab; /* Light yellow background */
+  border-radius: 5px; /* Rounded corners */
+}
+
 
 @media (max-width: 768px) {
     .card-wrapper {
