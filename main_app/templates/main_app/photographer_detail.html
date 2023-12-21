@@ -4,23 +4,22 @@
   <h1 class="text-center">Photographer Details</h1>
 
   <div class="card mb-4">
-    <div class="card-body">
+    <div class="card-body position-relative">
       <h5 class="card-title">{{ photographer.name }}</h5>
       <p class="card-text">Area of expertise: {{ photographer.get_area_of_expertise_display }}</p>
       <p class="card-text">Description: {{ photographer.description }}</p>
+  
+      {% if not is_client %}
+        <div class="position-absolute top-0 end-0 mt-2 me-2">
+          <a href="{% url 'photographers_update' photographer.id %}" class="btn btn-primary btn-sm">Edit</a>
+          <a href="{% url 'photographers_delete' photographer.id %}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+      {% endif %}
+  
+      <a href="{% url 'photographers_gallery' photographer.id %}" class="btn btn-warning mt-2">Gallery</a>
     </div>
-    {% if not is_client %}
-      <div class="card-footer">
-        <a href="{% url 'photographers_update' photographer.id %}" class="btn btn-primary">Edit</a>
-        <a href="{% url 'photographers_delete' photographer.id %}" class="btn btn-danger">Delete</a>
-
-    {% endif %}    
-        <a href="{% url 'photographers_gallery' photographer.id %}" class="btn btn-warning ">Gallery</a>
-      
-      </div>
-     
   </div>
-
+  
  
   
 
@@ -33,7 +32,7 @@
       <div class="row">
         {% for client in clients %}
           <div class="col-md-4 mb-4">
-            <div class="card h-100">
+            <div class="card h-100 position-relative">
               <div class="card-body">
                 <h5 class="card-title">{{ client.bride_name }} & {{ client.groom_name }}</h5>
                 <p class="card-text">Wedding Date: {{ client.wedding_date }}</p>
@@ -41,27 +40,29 @@
                 {% if message.sender == client %}
                   <p class="small"><em>{{ message.content }} - {{ message.timestamp }}</em></p>
                 {% endif %}
-              {% endfor %}
-
+                {% endfor %}
               </div>
-          
-                <div class="card-footer">
-                  <form action="{% url 'unassoc_client' photographer.id client.id  %}" method="POST">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-warning btn-sm">Remove</button>
-                  </form>
-                  
-                  <a href="{% url 'client_album' photographer.id client.id%}" class="btn btn-warning btn-sm">Album</a>
-                </div>
-            
+  
+             
+              <div class="position-absolute top-0 end-0 mt-2 me-2">
+                <form action="{% url 'unassoc_client' photographer.id client.id  %}" method="POST">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                </form>
+              </div>
+  
+              <div class="card-footer">
+                <a href="{% url 'client_album' photographer.id client.id%}" class="btn btn-warning btn-sm">Album</a>
+              </div>
             </div>
           </div>
         {% endfor %}
       </div>
     {% else %}
-      <p class="text-center">No weddings</p>
+      <p class="text-center">No Wedding Arranged</p>
     {% endif %}
   </div>
+  
 
   <hr>
 

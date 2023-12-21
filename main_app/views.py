@@ -226,7 +226,7 @@ def register_client(request):
             group = Group.objects.get(name='Client')
             user.groups.add(group)
             login(request, user)
-            return redirect('photographer_index')  # Redirect to a client-specific page
+            return redirect('photographers_index')  # Redirect to a client-specific page
     else:
         form = RegistrationForm()
 
@@ -267,8 +267,8 @@ def client_album(request,photographer_id, client_id):
 # client can  receive photos
 def client_received_album(request, client_id):
     client = get_object_or_404(Client, pk=client_id)
-    photos = client.photo_set.all()
-    return render(request,'album/client_album.html',{'client': client,'photos': photos})
+    photos = Photo.objects.filter(client=client).select_related('photographer')
+    return render(request,'album/client_received_album.html',{'client': client,'photos': photos})
 
 
 # photographers can add photos 

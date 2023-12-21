@@ -4,23 +4,24 @@
 <div class="container-fluid mt-5">
     <div class="row">
         <!-- Photo Side -->
-        <div class="col-lg-8 col-md-7">
-            <div class="photo-placeholder bg-light border" style="height: 100%; min-height: 400px;">
+        <div class="col-lg-7 col-md-7 p-0">
+            <!-- Placeholder for photo -->
+            <div class="photo-placeholder" style="height: 100vh; background-color: #eaeaea;">
                 <!-- Photo will be added here later -->
             </div>
         </div>
 
         <!-- Info Side -->
-        <div class="col-lg-4 col-md-5">
-            <h1 class="app-name">DreamPhotography</h1>
-            <p class="subtitle">Capture the moments that matter</p>
-            <p class="choose-studio">Your Perfect Wedding Photography Studio</p>
+        <div class="col-lg-5 col-md-5 p-5" style="background-color: white;">
+            <h1 class="app-name" style="font-size: 3rem; font-weight: bold; margin-bottom: 1rem;">DreamPhotography</h1>
+            <p class="subtitle" style="font-size: 1.5rem; margin-bottom: 1rem;">Capture the moments that matter</p>
+            <p class="choose-studio" style="font-size: 1.25rem; margin-bottom: 2rem;">Your Perfect Wedding Photography Studio</p>
 
             <div class="d-flex flex-column align-items-start">
-                <a href="{% url 'register_photographer' %}" class="btn btn-primary mb-2">I want to be a Photographer</a>
-                <a href="{% url 'login_photographer' %}" class="btn btn-secondary mb-2">I am a photographer</a>
-                <a href="{% url 'register_client' %}" class="btn btn-primary mb-2">I have a Wedding coming</a>
-                <a href="{% url 'login_client' %}" class="btn btn-secondary">I am your client</a>
+                <a href="{% url 'register_photographer' %}" class="btn btn-primary mb-3" style="padding: 1rem 2rem; font-size: 1.25rem;">I want to be a Photographer</a>
+                <a href="{% url 'login_photographer' %}" class="btn btn-outline-primary mb-3" style="padding: 1rem 2rem; font-size: 1.25rem;">I am a photographer</a>
+                <a href="{% url 'register_client' %}" class="btn btn-primary mb-3" style="padding: 1rem 2rem; font-size: 1.25rem;">I have a Wedding coming</a>
+                <a href="{% url 'login_client' %}" class="btn btn-outline-primary" style="padding: 1rem 2rem; font-size: 1.25rem;">I am your client</a>
             </div>
         </div>
     </div>

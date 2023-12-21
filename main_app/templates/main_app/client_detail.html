@@ -4,20 +4,23 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">Wedding Details</h1>
     <div class="card mb-4">
-        <div class="card-body">
-            <h5 class="card-title">{{ client.bride_name }} & {{ client.groom_name }}'s Wedding</h5>
-            <p class="card-text">Bride Age: {{ client.bride_age }}</p>
-            <p class="card-text">Groom Age: {{ client.groom_age }}</p>
-            <p class="card-text">Wedding Date: {{ client.wedding_date }}</p>
-            <p class="card-text">Location: {{ client.location }}</p>
-            <p class="card-text">Guests Number: {{ client.guests }}</p>
-            {% if not is_photographer %}
-                <a href="{% url 'clients_update' client.id %}" class="btn btn-primary">Edit</a>
-                <a href="{% url 'clients_delete' client.id %}" class="btn btn-danger">Delete</a>
-                <a href="{% url 'client_received_album' client.id%}" class="btn btn-warning">Album</a>
-            {% endif %}
+        <div class="card-body position-relative">
+          {% if not is_photographer %}
+            <div class="position-absolute top-0 end-0 mt-2 me-2">
+              <a href="{% url 'clients_update' client.id %}" class="btn btn-primary btn-sm">Edit</a>
+              <a href="{% url 'clients_delete' client.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </div>
+          {% endif %}
+          <h5 class="card-title">{{ client.bride_name }} & {{ client.groom_name }}'s Wedding</h5>
+          <p class="card-text">Bride Age: {{ client.bride_age }}</p>
+          <p class="card-text">Groom Age: {{ client.groom_age }}</p>
+          <p class="card-text">Wedding Date: {{ client.wedding_date }}</p>
+          <p class="card-text">Location: {{ client.location }}</p>
+          <p class="card-text">Guests Number: {{ client.guests }}</p>
+          <a href="{% url 'client_received_album' client.id%}" class="btn btn-warning">Album</a>
         </div>
-    </div>
+      </div>
+      
 
     <div class="my-photographers mb-4">
         <h2>My Photographers</h2>

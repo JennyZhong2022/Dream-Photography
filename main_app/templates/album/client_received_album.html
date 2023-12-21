@@ -21,17 +21,6 @@
         {% endfor %}
     </div>
 
-    {% if not is_client %}
-    <div class="photo-upload-form bg-light p-4 border rounded">
-        <h3 class="mb-3">Upload a Photo</h3>
-        <form action="{% url 'client_add_photo' photographer.id client.id %}" enctype="multipart/form-data" method="POST">
-            {% csrf_token %}
-            <div class="mb-3">
-                <input type="file" name="photo-file" class="form-control" multiple>
-            </div>
-            <button type="submit" class="btn btn-primary">Upload Photo</button>
-        </form>
-    </div>
-    {% endif %}
+   
 </div>
 {% endblock %}

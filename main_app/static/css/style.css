@@ -24,6 +24,22 @@ main{
   height: auto; /* Maintain aspect ratio */
 }
 
+.text-link {
+  color: #007bff; /* Bootstrap primary color for consistency */
+  text-decoration: none; /* Removes the underline */
+  background-color: transparent; /* Ensures no background */
+  font-weight: 500;
+}
+
+
+.text-link-delete {
+  color: rgb(255, 106, 0); /* Bootstrap primary color for consistency */
+  text-decoration: none; /* Removes the underline */
+  background-color: transparent; /* Ensures no background */
+  font-weight: 500;
+}
+
+
 
 
 @media (max-width: 768px) {
