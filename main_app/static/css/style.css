@@ -49,6 +49,28 @@ main{
   font-family: 'Dancing Script', cursive;
 }
 
+.photo-container {
+    overflow: hidden; /* Ensures the button doesn't exceed the photo boundaries */
+}
+
+.delete-button {
+    z-index: 10; /* Ensure the button is above the photo */
+    margin: 0.5rem; /* Spacing from the top-right corner */
+    padding: 0; /* Remove default padding */
+    line-height: 1; /* Adjust line height to fit the button size */
+    border: none; /* Optional: remove border from the button */
+    background-color: transparent; /* Optional: make the button background transparent */
+}
+
+.delete-button button {
+    border: none; /* Remove the border of the button */
+}
+
+.delete-button button:hover {
+    background-color: rgba(169, 95, 95, 0.6); /* Red background on hover with some transparency */
+}
+
+
 @media (max-width: 768px) {
     .card-wrapper {
         max-width: 100%;

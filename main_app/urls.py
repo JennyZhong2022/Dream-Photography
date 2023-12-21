@@ -25,7 +25,11 @@ urlpatterns=[
     path('photographers/<int:photographer_id>/client_album/<int:client_id>/add_photo/', views.add_photo, name='client_add_photo'), 
 
     # album photos received by client
-   path('clients/<int:client_id>/client_album/', views.client_received_album, name='client_received_album'),
+    path('clients/<int:client_id>/client_album/', views.client_received_album, name='client_received_album'),
+
+    # delete photos
+    path('delete_photo/<int:photo_id>/', views.delete_photo, name='delete_photo'),
+   
     
 
     # clients

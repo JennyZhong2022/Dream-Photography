@@ -300,3 +300,10 @@ def add_photo(request,photographer_id,client_id=None):
         return redirect('client_album', photographer_id=photographer_id,client_id=client.id)
     else:                
         return redirect('photographers_gallery', photographer_id=photographer_id)
+
+def delete_photo(request, photo_id):
+    photo = get_object_or_404(Photo, pk=photo_id)
+    photographer_id = photo.photographer.id  # Retrieve the photographer's ID associated with the photo
+    photo.delete()
+    return redirect('photographers_gallery', photographer_id=photographer_id)
+     
