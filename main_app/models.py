@@ -69,6 +69,8 @@ class Message(models.Model):
 class Photo(models.Model):
     url=models.CharField(max_length=300)
     photographer=models.ForeignKey(Photographer, on_delete=models.CASCADE)
+    # The null=True, blank=True allows this field to be optional since not all photos will be associated with a client.
+    client=models.ForeignKey(Client,on_delete=models.CASCADE,null=True, blank=True)
 
     def __str__(self):
         return f'Photo for photographer:{self.photographer.name} @ {self.url}'

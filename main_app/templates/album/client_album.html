@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<H1>{{client.bride_name}} and {{client.groom_name}}'s wedding photos from {{photographer.name}}</H1>
+
+<div class="container mt-5">      
+  <div class="photo-gallery row mb-4">
+    <!-- Photos will be added here -->
+    {% for photo in photos %}
+    <div class="col-md-6 mb-3">
+      <img src="{{ photo.url }}" class="img-fluid photo-thumbnail" alt="Photo">
+    </div>
+  {% empty %}
+    <div class="alert alert-info">No Photos Uploaded</div>
+  {% endfor %}
+  </div>
+
+  {% if not is_client %}
+  <div class="photo-upload-form bg-light border p-4">
+    <h3 class="mb-3">Upload a Photo</h3>
+    <form action="{% url 'client_add_photo' photographer.id client.id%}" enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <input type="file" name="photo-file" class="form-control" multiple>
+      </div>
+      <button type="submit" class="btn btn-primary">Upload Photo</button>
+    </form>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

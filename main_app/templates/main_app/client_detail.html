@@ -14,6 +14,7 @@
             {% if not is_photographer %}
                 <a href="{% url 'clients_update' client.id %}" class="btn btn-primary">Edit</a>
                 <a href="{% url 'clients_delete' client.id %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'client_received_album' client.id%}" class="btn btn-warning">Album</a>
             {% endif %}
         </div>
     </div>

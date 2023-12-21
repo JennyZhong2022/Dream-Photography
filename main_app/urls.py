@@ -16,7 +16,17 @@ urlpatterns=[
     path('photographers/<int:pk>/delete/',views.PhotographerDelete.as_view(),name='photographers_delete'),
 
     # photos for photographers
-    path('photographers/<int:photographer_id>/add_photo',views.add_photo,name='add_photo'),
+    path('photographers/<int:photographer_id>/gallery/',views.photographer_gallery, name='photographers_gallery'),
+    path('photographers/<int:photographer_id>/add_photo/',views.add_photo,name='add_photo'),
+    
+
+    # album photos from photographer to client
+    path('photographers/<int:photographer_id>/client_album/<int:client_id>/', views.client_album,name='client_album'),
+    path('photographers/<int:photographer_id>/client_album/<int:client_id>/add_photo/', views.add_photo, name='client_add_photo'), 
+
+    # album photos received by client
+   path('clients/<int:client_id>/client_album/', views.client_received_album, name='client_received_album'),
+    
 
     # clients
     path('clients/', views.ClientList.as_view(),name='clients_index'),

@@ -247,10 +247,36 @@ def login_client(request):
 
     return render(request, 'registration/client_login.html')
 
+# gallery inside photographer's detail page
+
+def photographer_gallery(request, photographer_id):
+    photographer = get_object_or_404(Photographer, pk=photographer_id)
+    # Fetch photos that are not associated with any client
+    photos = photographer.photo_set.filter(client__isnull=True)
+    return render(request, 'album/photographer_gallery.html', {'photographer': photographer, 'photos': photos})
+
+
+# client album inside photographer's detail page
+def client_album(request,photographer_id, client_id):
+    photographer = get_object_or_404(Photographer, pk=photographer_id)
+    # Fetch photos associated with the specific client
+    client = get_object_or_404(Client, pk=client_id)
+    photos = photographer.photo_set.filter(client=client)
+    return render(request,'album/client_album.html',{'photographer': photographer, 'client': client,'photos': photos})
+
+# client can  receive photos
+def client_received_album(request, client_id):
+    client = get_object_or_404(Client, pk=client_id)
+    photos = client.photo_set.all()
+    return render(request,'album/client_album.html',{'client': client,'photos': photos})
+
 
 # photographers can add photos 
  
-def add_photo(request,photographer_id):
+def add_photo(request,photographer_id,client_id=None):
+    photographer = get_object_or_404(Photographer, pk=photographer_id)
+    client = get_object_or_404(Client, pk=client_id) if client_id else None
+
     if request.method == 'POST':
     # photo-file will be the "name" attribute on the <input type="file">
         photo_files = request.FILES.getlist('photo-file')  # Retrieve all files
@@ -266,8 +292,11 @@ def add_photo(request,photographer_id):
                 # build the full url string
                 url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
                 # we can assign to cat_id or cat (if you have a cat object)
-                Photo.objects.create(url=url, photographer_id=photographer_id)
+                Photo.objects.create(url=url, photographer=photographer, client=client)
             except Exception as e:
                 print('An error occurred uploading file to S3')
                 print(e)
-    return redirect('photographers_details', pk=photographer_id)
+    if client:
+        return redirect('client_album', photographer_id=photographer_id,client_id=client.id)
+    else:                
+        return redirect('photographers_gallery', photographer_id=photographer_id)
