@@ -194,7 +194,7 @@ def register_photographer(request):
             group=Group.objects.get(name='Photographer')
             user.groups.add(group)
             login(request, user)
-            return redirect('clients_index')
+            return redirect('home')
     else:
         form=RegistrationForm()
     return render(request,'registration/photographer_register.html',{'form':form})    
@@ -209,7 +209,7 @@ def login_photographer(request):
         # Check if user is a photographer and not a client
         if user is not None and user.groups.filter(name='Photographer').exists() and not user.groups.filter(name='Client').exists():
             login(request, user)
-            return redirect('photographers_index')
+            return redirect('home')
         else:
             messages.error(request, 'Invalid username or password.')
 
@@ -226,7 +226,7 @@ def register_client(request):
             group = Group.objects.get(name='Client')
             user.groups.add(group)
             login(request, user)
-            return redirect('photographers_index')  # Redirect to a client-specific page
+            return redirect('home')  # Redirect to a client-specific page
     else:
         form = RegistrationForm()
 
@@ -241,7 +241,7 @@ def login_client(request):
         # Check if user is a client and not a photographer
         if user is not None and user.groups.filter(name='Client').exists() and not user.groups.filter(name='Photographer').exists():
             login(request, user)
-            return redirect('clients_index')
+            return redirect('home')
         else:
             messages.error(request, 'Invalid username or password.')
 

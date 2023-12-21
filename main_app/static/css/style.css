@@ -40,7 +40,14 @@ main{
 }
 
 
+.carousel-item img {
+  max-height: 100vh; /* Set a maximum height */
+  object-fit:cover; /* Adjust this as needed */
+}
 
+.navbar-brand,.app-name,.subtitle{
+  font-family: 'Dancing Script', cursive;
+}
 
 @media (max-width: 768px) {
     .card-wrapper {

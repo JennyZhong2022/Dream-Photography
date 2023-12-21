@@ -137,7 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # or a view page
 # LOGIN_REDIRECT_URL = 'some_view_name'
 
-LOGIN_REDIRECT_URL = 'photographers_index'
+LOGIN_REDIRECT_URL = 'about'
 
 LOGOUT_REDIRECT_URL = '/'
 
