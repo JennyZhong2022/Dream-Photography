@@ -73,8 +73,9 @@ http://localhost:8000
 ![23011703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/93f2f335-3661-46bd-a3fc-84751f8cc4e1)
 ![23031703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/e55f4973-6306-4ea2-b495-4ee773988d51)
 ![23021703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/d107e156-de68-4d04-89dd-f41592a88930)
-![23061703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/9c9967a5-36cd-4b88-b9ac-2596f4bece91)
 ![23051703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/bc858e3b-232d-49e9-b802-68c900f40d07)
+![23061703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/9c9967a5-36cd-4b88-b9ac-2596f4bece91)
+
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
