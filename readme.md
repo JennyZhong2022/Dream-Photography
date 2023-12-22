@@ -64,9 +64,8 @@ http://localhost:8000
 
 
 ## Screenshots
+![22981703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/9861dd46-952d-469f-ac10-3b85e17a1585)
 
-![Screenshot Description](static/screenshot/11.jpg)
-<!-- ![Screenshot Description](src/screenshots/play-table.jpg) -->
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
