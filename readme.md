@@ -21,7 +21,7 @@ DreamPhotography is a web-based application designed for wedding photography boo
 ### Setup
 1. Clone the repository:
 
-git clone https://github.com/your-username/dreamphotography.git
+`git clone https://github.com/your-username/dreamphotography.git`
 
 2. Navigate to the project directory:
 
@@ -65,8 +65,8 @@ http://localhost:8000
 
 ## Screenshots
 
-![Screenshot Description](src/screenshots/slot-machine.jpg)
-![Screenshot Description](src/screenshots/play-table.jpg)
+![Screenshot Description](static/screenshot/11.jpg)
+<!-- ![Screenshot Description](src/screenshots/play-table.jpg) -->
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
