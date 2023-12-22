@@ -8,12 +8,14 @@
     <div class="col-md-6 mb-3">
       <div class="photo-container position-relative">
       <img src="{{ photo.url }}" class="img-fluid photo-thumbnail" alt="Photo">
+      {% if not is_client %}
       <form action="{% url 'delete_photo' photo.id %}" method="post" class="delete-button position-absolute top-0 end-0">
         {% csrf_token %}
         <button type="submit" class="btn btn-sm" onclick="return confirm('Are you sure you want to delete this photo?');">
           <span aria-hidden="true">X</span>
       </button>
     </form>
+    {% endif %}
     </div>
     </div>
   {% empty %}
