@@ -66,7 +66,7 @@ http://localhost:8000
 This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
-For any queries or suggestions, please contact us at [email](zhongxiao2017@gmail.com).
+For any queries or suggestions, please contact us at email:(zhongxiao2017@gmail.com).
 
 ---
 
