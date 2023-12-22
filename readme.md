@@ -67,7 +67,7 @@ http://localhost:8000
 ![22981703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/9861dd46-952d-469f-ac10-3b85e17a1585)
 ![23071703220010_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/afc64eeb-3b47-4da6-9325-a2663e4dad7e)
 ![23101703220093_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/ba296a5a-0eb1-4980-9f67-b186096ee509)
-![23081703220093_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/b76573b3-cc71-439d-b013-310817cf2292)
+![23111703220187_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/fdc20c78-c2ee-4d4b-a47f-0aabbb984af7)
 ![23091703220093_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/5125f069-65e3-4f0e-bc3f-a48c4ba5d4fc)
 ![23001703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/a94470bf-3721-4b94-9d4c-574712370a48)
 ![23011703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/93f2f335-3661-46bd-a3fc-84751f8cc4e1)
