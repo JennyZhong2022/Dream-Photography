@@ -67,7 +67,7 @@ main{
 }
 
 .delete-button button:hover {
-    background-color: rgba(169, 95, 95, 0.6); /* Red background on hover with some transparency */
+    background-color: rgba(210, 91, 91, 0.6); /* Red background on hover with some transparency */
 }
 
 

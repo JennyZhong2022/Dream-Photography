@@ -62,6 +62,12 @@ http://localhost:8000
 - Browse photographer portfolios
 - Send messages and book photographers for your wedding
 
+
+## Screenshots
+
+![Screenshot Description](src/screenshots/slot-machine.jpg)
+![Screenshot Description](src/screenshots/play-table.jpg)
+
 ## License
 This project is licensed under the [MIT License](LICENSE).
 
