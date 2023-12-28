@@ -35,6 +35,8 @@ urlpatterns=[
     # delete photos from photographer gallery
     path('delete_photo/<int:photo_id>/', views.delete_photo, name='delete_photo'),
    
+    # delete photos from client album by photographer
+    path('delete_photo/<int:photo_id>/<int:client_id>/', views.delete_photo, name='delete_album_photo'),
     
 
     # clients

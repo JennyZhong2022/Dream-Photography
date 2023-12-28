@@ -304,11 +304,22 @@ def add_photo(request,photographer_id,client_id=None):
         return redirect('photographers_gallery', photographer_id=photographer_id)
         
 
-def delete_photo(request, photo_id,client_id):
+
+def delete_photo(request, photo_id, client_id=None):
     photo = get_object_or_404(Photo, pk=photo_id)
-    photographer_id = photo.photographer.id  # Retrieve the photographer's ID associated with the photo
+    photographer_id = photo.photographer.id
+
     photo.delete()
-    return redirect('photographers_gallery', photographer_id=photographer_id)
+
+    if client_id is not None:
+        # Redirect to client album if client_id is provided
+        return redirect('client_album', photographer_id=photographer_id, client_id=client_id)
+    else:
+        # Redirect to photographer's gallery if no client_id
+        return redirect('photographers_gallery', photographer_id=photographer_id)
+
+
+
 
 
 def download_photo(request, photo_id):
