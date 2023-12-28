@@ -70,6 +70,27 @@ main{
     background-color: rgba(210, 91, 91, 0.6); /* Red background on hover with some transparency */
 }
 
+.photo-card {
+  position: relative;
+}
+
+.download-form {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.download-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px; 
+
+}
+
+.download-btn:hover {
+  color: #0056b3; 
+}
+
 
 @media (max-width: 768px) {
     .card-wrapper {

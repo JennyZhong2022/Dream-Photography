@@ -14,6 +14,8 @@ from django.contrib.auth.models import Group, Permission,User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
+
 
 
 # Create your views here.
@@ -300,10 +302,38 @@ def add_photo(request,photographer_id,client_id=None):
         return redirect('client_album', photographer_id=photographer_id,client_id=client.id)
     else:                
         return redirect('photographers_gallery', photographer_id=photographer_id)
+        
 
-def delete_photo(request, photo_id):
+def delete_photo(request, photo_id,client_id):
     photo = get_object_or_404(Photo, pk=photo_id)
     photographer_id = photo.photographer.id  # Retrieve the photographer's ID associated with the photo
     photo.delete()
     return redirect('photographers_gallery', photographer_id=photographer_id)
+
+
+def download_photo(request, photo_id):
+    # Get the photo object
+    photo = get_object_or_404(Photo, pk=photo_id)
+
+    # Extract the key from the photo URL
+    # Assuming the photo URL format is something like: 'https://<bucket-name>.s3.amazonaws.com/<key>'
+    key = photo.url.split('/')[-1]
+
+    # Create an S3 client
+    s3 = boto3.client('s3')
+
+    try:
+        # Generate a presigned URL for the file
+        presigned_url = s3.generate_presigned_url('get_object',
+        Params={'Bucket': os.environ['S3_BUCKET'], 'Key': key},
+        ExpiresIn=3600)  # Link expires in 1 hour
+        # Redirect to the presigned URL for the file to be downloaded
+        return HttpResponseRedirect(presigned_url)
+    except Exception as e:
+        print('An error occurred generating a presigned URL for S3')
+        print(e)
+        # Redirect to an error page or show an error message
+        return HttpResponseRedirect('album/client_received_album.html')  # Redirect to a safe fallback URL
+
+
      

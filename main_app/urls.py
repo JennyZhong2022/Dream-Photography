@@ -26,6 +26,11 @@ urlpatterns=[
 
     # album photos received by client
     path('clients/<int:client_id>/client_album/', views.client_received_album, name='client_received_album'),
+    # album photos can be downloaded by client
+    path('clients/client_album_download_photo/<int:photo_id>/', views.download_photo, name='download_photo'),
+
+    
+
 
     # delete photos from photographer gallery
     path('delete_photo/<int:photo_id>/', views.delete_photo, name='delete_photo'),

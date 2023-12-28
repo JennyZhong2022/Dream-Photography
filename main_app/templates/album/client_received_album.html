@@ -7,10 +7,16 @@
     <div class="row mb-4">
         {% for photo in photos %}
             <div class="col-md-6 col-lg-4 mb-3">
-                <div class="card h-100">
+                <div class="card h-100 photo-card"> 
                     <img src="{{ photo.url }}" class="card-img-top img-fluid" alt="Wedding Photo">
                     <div class="card-body">
                         <p class="card-text text-muted text-center">Uploaded by: {{ photo.photographer.name }}</p>
+                
+                        <form action="{% url 'download_photo' photo.id %}" method="post" class="download-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm download-btn" >&#x21E9;  <!-- Unicode for a simple down arrow -->
+                        </button>
+                        </form>
                     </div>
                 </div>
             </div>
