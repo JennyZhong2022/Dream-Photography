@@ -55,6 +55,8 @@ urlpatterns=[
     path('login/photographer/',views.login_photographer, name='login_photographer'),
     path('register/client/', views.register_client, name='register_client'),
     path('login/client/', views.login_client, name='login_client'),
+    path('register/admin/',views.register_admin, name='register_admin'),
+    path('login/admin/',views.login_admin, name='login_admin'),
     
 
 

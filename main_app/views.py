@@ -249,6 +249,38 @@ def login_client(request):
 
     return render(request, 'registration/client_login.html')
 
+#  GROUP Admin
+
+def register_admin(request):
+    if request.method == 'POST':
+        form=RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            group=Group.objects.get(name='Admin')
+            user.groups.add(group)
+            login(request, user)
+            return redirect('home')
+    else:
+        form=RegistrationForm()
+    return render(request,'registration/admin_register.html',{'form':form})    
+
+
+def login_admin(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        # Check if user is not a photographer and not a client
+        if user is not None and not user.groups.filter(name='Photographer').exists() and not user.groups.filter(name='Client').exists() and user.groups.filter(name='Admin').exists():
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Invalid username or password.')
+
+    return render(request, 'registration/admin_login.html')
+
+
 # gallery inside photographer's detail page
 
 def photographer_gallery(request, photographer_id):
