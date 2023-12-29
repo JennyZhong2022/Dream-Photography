@@ -1,8 +1,8 @@
+
 # DreamPhotography
 
 ## Introduction
 DreamPhotography is a web-based application designed for wedding photography booking and management. It allows clients to find and message photographers for their wedding booking, while providing a platform for photographers to showcase their work. Photographers can upload photos to their clients' album and clients can download photos from their album. It is deployed to Heroku: [DreamPhotographer](https://dreamphotography-f9294ed19bab.herokuapp.com/)
-
 
 ## Features
 - Photographer and client account registration and management
@@ -73,6 +73,7 @@ http://localhost:8000
 ![23021703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/d107e156-de68-4d04-89dd-f41592a88930)
 ![23051703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/bc858e3b-232d-49e9-b802-68c900f40d07)
 ![23061703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/9c9967a5-36cd-4b88-b9ac-2596f4bece91)
+![23211703814713_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/456cf8e4-3b65-46a2-b0ec-81b62795a7e7)
 
 
 ## License
