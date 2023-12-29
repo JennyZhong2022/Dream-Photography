@@ -73,8 +73,7 @@ http://localhost:8000
 ![23021703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/d107e156-de68-4d04-89dd-f41592a88930)
 ![23051703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/bc858e3b-232d-49e9-b802-68c900f40d07)
 ![23061703204738_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/9c9967a5-36cd-4b88-b9ac-2596f4bece91)
-![23231703815017_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/e06ddc41-77c4-416f-bebe-a42834aa9bbf)
-
+![23241703815082_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/82d0dcc9-cd64-482a-8528-fa88760ddc68)
 
 
 ## License
