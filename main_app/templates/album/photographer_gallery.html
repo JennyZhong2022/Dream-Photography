@@ -25,7 +25,6 @@
 
   {% if not is_client %}
   <div class="photo-upload-form bg-light border p-4">
-    <h3 class="mb-3">Upload a Photo</h3>
     <form action="{% url 'add_photo' photographer.id %}" enctype="multipart/form-data" method="POST">
       {% csrf_token %}
       <div class="mb-3">
