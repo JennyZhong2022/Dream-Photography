@@ -76,8 +76,6 @@ http://localhost:8000
 ![23251703815122_ pic](https://github.com/JennyZhong2022/Dream-Photography/assets/109143979/48f80acb-8421-49dd-8096-f2a62417a4b1)
 
 
-## License
-This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 For any queries or suggestions, please contact us at email:(zhongxiao2017@gmail.com).
